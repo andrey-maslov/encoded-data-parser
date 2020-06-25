@@ -9,7 +9,7 @@ View of URL parameter
 
 Type of returned decoded data is array like: 
 
-####Javascript
+#### Javascript
 ```javascript
 [
     [1,4,1],
@@ -23,9 +23,9 @@ Type of returned decoded data is array like:
 ]
 ```
 
-####Expample of use
+#### Expample of use
 
-#####Put as dependency to file package.json
+##### Put as dependency to file package.json
 ```javascript
 "dependencies": {
     "encoded-data-parser": "git+https://github.com/andrey-maslov/encoded-data-parser.git"
@@ -35,7 +35,7 @@ Type of returned decoded data is array like:
 npm install
 `
 
-#####In component
+##### In component
 ```javascript
 import parseEncodedData from 'encoded-data-parser';
 
