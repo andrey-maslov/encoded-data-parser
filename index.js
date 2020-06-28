@@ -1,20 +1,34 @@
-module.exports = function parseEncodedData(key = 'encdata') {
+function getAndDecodeData(key = 'encdata', encodedValue = null) {
 
-    const value = parseUrl(key)
+    let value = !encodedValue ? parseUrl(key) : encodedValue.trim();
 
     if (!value || !isBase64(value)) {
-        return null
+        return {
+            encoded: null,
+            decoded: null,
+            data: null,
+        }
     }
-    let userDataString = atob(value)
+    const userDataString = atob(value)
 
-    if (!validateStringData(userDataString) || !IsJsonString(userDataString)) {
-        return null
+    if (!validateDecodedData(userDataString) || !IsJsonString(userDataString)) {
+        return {
+            encoded: null,
+            decoded: null,
+            data: null,
+        }
     }
 
-    return JSON.parse(userDataString);
+    // return JSON.parse(userDataString);
+
+    return {
+        encoded: value,
+        decoded: userDataString,
+        data: JSON.parse(userDataString),
+    }
 }
 
-function parseUrl(key) {
+function parseUrl(key  = 'encdata') {
     let value = null;
     if (typeof window !== 'undefined') {
         const urlParams = new URLSearchParams(window.location.search);
@@ -23,7 +37,7 @@ function parseUrl(key) {
     return value;
 }
 
-function validateStringData(value) {
+function validateDecodedData(value) {
 
     //TODO needs improvement
     const regex = /^\[\[([+-]?\d,?){3}],\[(\[([+-]?\d,?){5}],?){5}\]\]$/
@@ -33,7 +47,7 @@ function validateStringData(value) {
 
 function isBase64(str) {
     try {
-        return btoa(atob(str)) == str;
+        return btoa(atob(str)) === str;
     } catch (err) {
         return false;
     }
@@ -46,4 +60,12 @@ function IsJsonString(str) {
         return false;
     }
     return true;
+}
+
+module.exports = {
+    getAndDecodeData,
+    parseUrl,
+    validateDecodedData,
+    isBase64,
+    IsJsonString
 }
