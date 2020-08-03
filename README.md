@@ -9,13 +9,13 @@
 
 `encdata=W1sxLDQsMV0sW1stMiwwLDEsLTIsMl0sWy0xLDEsMSwyLC01XSxbMiwzLDAsMywwXSxbMSw0LDAsLTIsMV0sWzIsLTMsLTIsLTMsMV1dXQ==`
 
-Вид возвращаемого значения в случае прошедшего валидацию значения: 
+В случае валидного значения на входе возвращает результат вида: 
 
 #### Javascript
 ```javascript
 {
-   encoded: '[[1,4,1],[[-2,0,1,-2,2],[-1,1,1,2,-5],[2,3,0,3,0],[1,4,0,-2,1],[2,-3,-2,-3,1]]]',
-   decoded: 'W1sxLDQsMV0sW1stMiwwLDEsLTIsMl0sWy0xLDEsMSwyLC01XSxbMiwzLDAsMywwXSxbMSw0LDAsLTIsMV0sWzIsLTMsLTIsLTMsMV1dXQ==',
+   encoded: 'W1sxLDQsMV0sW1stMiwwLDEsLTIsMl0sWy0xLDEsMSwyLC01XSxbMiwzLDAsMywwXSxbMSw0LDAsLTIsMV0sWzIsLTMsLTIsLTMsMV1dXQ==',
+   decoded: '[[1,4,1],[[-2,0,1,-2,2],[-1,1,1,2,-5],[2,3,0,3,0],[1,4,0,-2,1],[2,-3,-2,-3,1]]]',
    data: [
             [1,4,1],
                  [
@@ -25,8 +25,18 @@
                      [1,4,0,-2,1],
                      [2,-3,-2,-3,1]
                  ]
-            ],
+            ]
     }
+```
+
+В случае невалидного значения на входе возвращает результат вида: 
+
+#### Javascript
+```javascript
+{
+   encoded: null,
+   decoded: null,
+   data: null
 ```
 
 #### Использование
